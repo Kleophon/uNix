@@ -1,4 +1,4 @@
-{pkgs,...}:
+{pkgs,fenix,...}:
 {
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
@@ -25,6 +25,7 @@
       fzf
       godot-mono
       aseprite
+      fenix.packages.x86_64-linux.stable.toolchain
       obs-studio
   ];
 }

@@ -7,12 +7,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };    
     aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-26.05";
-    aagl.inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
-
+    aagl.inputs.nixpkgs.follows = "nixpkgs"; 
+      fenix = {
+        url = "github:nix-community/fenix";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
   };
-  outputs = { self, nixpkgs, home-manager,aagl,  ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager,aagl,fenix,  ... }@inputs: {
     nixosConfigurations."uNix" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+        specialArgs = { inherit inputs fenix; }; 
       modules = [
         ./configuration.nix
         home-manager.nixosModules.home-manager
@@ -25,14 +29,19 @@
         }
          {
           imports = [ aagl.nixosModules.default ];
-          nix.settings = aagl.nixConfig; # Set up Cachix
-          programs.anime-game-launcher.enable = true; # Adds launcher and /etc/hosts rules
+          nix.settings = aagl.nixConfig; 
+          programs.anime-game-launcher.enable = true; 
           programs.anime-games-launcher.enable = true;
           programs.honkers-railway-launcher.enable = true;
           programs.honkers-launcher.enable = true;
           programs.wavey-launcher.enable = true;
           programs.sleepy-launcher.enable = true;
         }
+         {
+           environment.systemPackages = [
+             fenix.packages.x86_64-linux.stable.toolchain
+           ];
+         }
       ];
     };
   };
