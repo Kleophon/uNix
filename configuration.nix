@@ -43,9 +43,7 @@
 
   services.displayManager.ly.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = false;
-  services.desktopManager.plasma6.enable = true;
+
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -86,10 +84,7 @@
     isNormalUser = true;
     description = "kleophon";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
+    shell=pkgs.zsh;
   };
   services.flatpak.enable = true;
   programs.steam.enable = true;
@@ -103,8 +98,16 @@
   CPU_BOOST_ON_BAT = 0;
 };
 
+programs.zsh.enable = true;
+programs.direnv = {
+  enable = true;
+  nix-direnv.enable = true;
+};
 
-
+programs.nix-ld = {
+  enable = true;
+  libraries = pkgs.steam-run.args.multiPkgs pkgs;
+};
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
