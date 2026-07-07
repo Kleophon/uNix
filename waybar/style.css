@@ -1,0 +1,110 @@
+@define-color fg      #eeeeee;
+@define-color fg-dim  #666666;
+@define-color bg      #000000;
+@define-color accent  #fff2c5;
+@define-color warn    #e0a060;
+@define-color crit    #e06060;
+
+* {
+    font-family: JetBrainsMono Nerd Font Mono;
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    color: @fg;
+    background-color: @bg;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+/* ── left ───────────────────────────────────────── */
+
+#workspaces {
+    margin-right: 8px;
+}
+
+#workspaces button {
+    color: @fg-dim;
+    padding: 0 6px;
+    transition: color 150ms ease;
+}
+
+#workspaces button.active {
+    color: @accent;
+}
+
+#workspaces button.empty {
+    color: #333333;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    color: @fg;
+    box-shadow: none;
+}
+
+
+#temperature,
+#memory,
+#battery {
+    padding: 0 10px;
+    color: @fg-dim;
+}
+
+#temperature.critical {
+    color: @crit;
+}
+
+/* ── center ─────────────────────────────────────── */
+
+#clock {
+    color: @fg;
+    letter-spacing: 0.03em;
+}
+
+/* ── right ──────────────────────────────────────── */
+
+#wireplumber,
+#idle_inhibitor,
+#network,
+#bluetooth,
+#tray {
+    padding: 0 10px;
+    color: @fg-dim;
+}
+
+#wireplumber.muted {
+    color: #444444;
+}
+
+#battery.warning {
+    color: @warn;
+}
+
+#battery.critical {
+    color: @crit;
+}
+
+#battery.charging {
+    color: @fg;
+}
+
+#idle_inhibitor.activated {
+    color: @accent;
+}
+
+#network.disconnected {
+    color: #444444;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    color: @warn;
+}

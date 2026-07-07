@@ -1,0 +1,99 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 28,
+    "spacing": 0,
+
+    "modules-left": ["niri/workspaces", "custom/platform-profile", "temperature", "memory", "battery"],
+    "modules-center": ["clock"],
+    "modules-right": ["wireplumber", "idle_inhibitor", "network", "bluetooth", "tray"],
+
+    "niri/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "󱓻",
+            "default": "󱓼"
+        }
+    },
+
+    "clock": {
+        "format": "{:%d.%m.%Y  %H:%M}",
+        "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "wireplumber": {
+        "format": "󱄠  {volume}%",
+        "format-muted": "󰝟  muted",
+        "max-volume": 200,
+        "scroll-step": 5,
+
+    },
+
+
+    "battery": {
+        "bat": "BAT0",
+        "interval": 10,
+        "format": "{icon}  {capacity}% ",
+        "format-charging": "󰂄  {capacity}%  ",
+        "format-plugged": "󰚥  {capacity}%",
+        "tooltip-format": "{timeTo}",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "states": {
+            "warning": 30,
+            "critical": 15
+        }
+    },
+
+    "memory": {
+        "interval": 10,
+        "format": "󰍛  {used:0.1f}G",
+        "tooltip-format": "{used:0.1f}G / {total:0.1f}G"
+    },
+
+    "temperature": {
+        "interval": 5,
+        "format": "  {temperatureC}°C",
+        "critical-threshold": 80,
+        "format-critical": "  {temperatureC}°C"
+    },
+
+    "network": {
+        "format": "{icon}",
+        "format-ethernet": "󱂇",
+        "format-wifi": "{icon}",
+        "format-disconnected": "󰤮",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format-wifi": "{essid}  {signalStrength}%",
+        "tooltip-format-ethernet": "{ifname}",
+        "tooltip-format-disconnected": "disconnected",
+        "on-click":"kitty -e ~/.config/waybar/network",
+        "on-click-right":"kitty -e ~/.config/waybar/network off"
+    },
+
+    "bluetooth": {
+        "format": "󰂯",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂱  {num_connections}",
+        "tooltip-format": "{controller_alias}",
+        "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "on-click":"kitty -e ~/.config/waybar/bluetooth",
+        "on-click-right":"kitty -e ~/.config/waybar/bluetooth off"
+    },
+
+    "tray": {
+        "icon-size": 14,
+        "spacing": 12
+    },
+
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰛐",
+            "deactivated": "󰛑"
+        },
+        "tooltip-format-activated": "inhibiting idle",
+        "tooltip-format-deactivated": "idle allowed"
+    }
+}

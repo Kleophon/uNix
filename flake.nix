@@ -12,11 +12,14 @@
         url = "github:nix-community/fenix";
         inputs.nixpkgs.follows = "nixpkgs";
       };
+  awww.url = "git+https://codeberg.org/LGFae/awww";
+
+   
   };
   outputs = { self, nixpkgs, home-manager,aagl,fenix,  ... }@inputs: {
     nixosConfigurations."uNix" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-        specialArgs = { inherit inputs fenix; }; 
+        specialArgs = { inherit inputs fenix ; }; 
       modules = [
         ./configuration.nix
         home-manager.nixosModules.home-manager
